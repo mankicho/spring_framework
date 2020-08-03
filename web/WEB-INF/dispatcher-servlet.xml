@@ -8,10 +8,21 @@
        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <mvc:annotation-driven/>
-    <context:component-scan base-package="main.java.controller"/>
+    <context:component-scan base-package="controller"/>
+    <context:component-scan base-package="exception"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"/>
         <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 1024 * 1024 * 10 bytes 10MB -->
+        <property name="maxUploadSize" value="104857560"/>
+        <!-- 1024 * 1024 * 2 bytes 2MB -->
+        <property name="maxUploadSizePerFile" value="2097152"/>
+        <property name="uploadTempDir" value="file:/C:/upload/tmp"/>
+        <property name="maxInMemorySize" value="10485756"/> <!-- 메모리에서 보관하는 최대의 크기, 이 크기를 넘어가면 임시 디렉토리에 보관됨 -->
     </bean>
 </beans>
